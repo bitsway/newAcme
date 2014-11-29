@@ -619,6 +619,8 @@ function marketRetailerNext() {
 				$("#wait_image_unschedule_market_ret").hide();		
 				$("#btn_unschedule_market_ret").show();
 			}else{
+				localStorage.visit_client_past=localStorage.visit_client
+				
 				$("#wait_image_unschedule_market_ret").hide();		
 				$("#btn_unschedule_market_ret").show();
 				var visitMarketStr=$("#unschedule_market_combo_id").val();
@@ -633,6 +635,14 @@ function marketRetailerNext() {
 				localStorage.visit_distributor_nameid=visit_distributor_nameid
 				
 				localStorage.visit_page="YES"
+				
+				//===================
+				if (localStorage.visit_client_past != localStorage.visit_client){
+					localStorage.productOrderStr='';
+					//getOrder();
+				}
+				
+				
 				
 				//--------
 				$("#err_m_retailer_next").text("");
@@ -659,9 +669,9 @@ function getOrder(){
 	$.mobile.navigate(url);	
 	//-----
 	
-	/*var productList=localStorage.productListStr.split('<rd>');
+	var productList=localStorage.productListStr.split('<rd>');
 	var productLength=productList.length;
-	//alert (localStorage.productListStr);
+	/*//alert (localStorage.productListStr);
 	for (var i=0; i < productLength; i++){
 		var productArray2 = productList[i].split('<fd>');
 		var product_id2=productArray2[1];	
@@ -682,6 +692,17 @@ function getOrder(){
 			}		
 		}
 	}
+	else{
+		for (var i=0; i < productLength; i++){
+			var productArray2 = productList[i].split('<fd>');
+			var product_id2=productArray2[1];	
+			var product_name2=productArray2[0];
+			$("#order_qty"+product_id2).val('');
+			//alert (product_id2);
+		}	
+	}
+	
+	
 }
 
 //--------------------------------- Order: Set Order data
@@ -780,15 +801,15 @@ function lscVisitSubmit(){
 	lat==0;
 	long==0;
 		//if (lat=='' || lat==0 || long=='' || long==0){
-		if (lat=='' || long=='' ){
-			$("#errorChkVSubmit").html('Location not Confirmed');		
-		}else{
+		//if (lat=='' || long=='' ){
+//			$("#errorChkVSubmit").html('Location not Confirmed');		
+//		}else{
 			
 			if (visitClientId=='' || visitClientId==undefined){
 				$("#errorChkVSubmit").html('Invalid Client');		
 			}else{
 				if(visit_type=='' || visit_type==undefined){
-					$("#errorChkVSubmit").html('Invalid Visit Type');
+					$("#errorChkVSubmit").html('Invalid Visit');
 				}else{
 					$("#btn_visit_submit").hide();
 					$("#wait_image_visit_submit").show();		
@@ -822,8 +843,9 @@ function lscVisitSubmit(){
 								}else{					
 									var resultArray = result.split('success');			
 									var result_string=resultArray[1].replace('END','');
+									var result_string=result_string.replace('<fd>','');
 										//-----------
-										localStorage.visit_client=''
+										//localStorage.visit_client=''
 										//localStorage.visit_type=''
 										//localStorage.scheduled_date=''
 										localStorage.marchandizingStr=''
@@ -835,7 +857,7 @@ function lscVisitSubmit(){
 										$("#lat").val('');
 										$("#long").val('');
 										$("#lscPhoto").val('');
-										document.getElementById('myImage').src = '';
+										//document.getElementById('myImage').src = '';
 										
 										$("#lat_p").val('');
 										$("#long_p").val('');								
@@ -845,11 +867,18 @@ function lscVisitSubmit(){
 										
 										$("#wait_image_visit_submit").hide();
 										$("#btn_visit_submit").show();
-										
+										//alert ('1');
 
 										
 										//--
-										$("#visit_result").html(result_string);
+										
+										var result_string='<table style="background-image:url(result_back.png); background-repeat:no-repeat" width="300px" border="0" cellspacing="0" cellpadding="0"> '+ 
+															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+															'<tr><td align="center" style="color:#FFF" ><div >'+result_string +'</div><div >Submitted Successfully</div><div >'+localStorage.visit_client+'</div>'+
+															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+															'</td></tr></table>'
+										$("#visit_result").html(result_string );
 										
 										
 										
@@ -860,8 +889,8 @@ function lscVisitSubmit(){
 										// Clear localStorage
 										
 										localStorage.productOrderStr='';
-										localStorage.visit_client='';
-										localStorage.visit_type='';
+										//localStorage.visit_client='';
+										//localStorage.visit_type='';
 										
 										
 										
@@ -879,7 +908,7 @@ function lscVisitSubmit(){
 					 });//end ajax	
 				}
 			}
-		  }//locaction check
+		 // }//locaction check
 
   }
 
@@ -974,6 +1003,7 @@ function cart_data() {
 		localStorage.total_value=total_value.toFixed(2);
 		$("#product_list_tbl_cart").html(localStorage.product_tbl_cart);
 		$("#product_total_cart").html("Total Order Amount: "+localStorage.total_value + " BDT");
+		$("#product_total_last").html("Total Order Amount: "+localStorage.total_value + " BDT");
 
 	}
 	else{
@@ -986,3 +1016,10 @@ function cart_data() {
 	
 }
 //----------------------cart end----------------
+function cancel_cart() {
+	localStorage.productOrderStr='';	
+	getOrder()
+	//alert ('nadira');
+	var url = "#page_market_ret";	
+	$.mobile.navigate(url);
+}
