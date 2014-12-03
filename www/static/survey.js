@@ -316,7 +316,8 @@ function check_user() {
 									var productList=localStorage.productListStr.split('<rd>');
 									var productLength=productList.length;						
 									var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
-									//alert (productLength);
+									
+									//var product_tbl_order=''
 									for (var j=0; j < productLength-1; j++){
 										var pArray = productList[j].split('<fd>');
 										
@@ -326,10 +327,13 @@ function check_user() {
 										var product_category=pArray[3];
 										
 										var product_qty='';																		
-										product_tbl_order+='<tr  style="border-bottom:1px solid #D2EEE9;"><td width="40%" style="text-align:center; padding-left:5px;"><input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td width="60%" style="text-align:left;">&nbsp;&nbsp;'+product_name.toUpperCase()+'</td></tr>';
+										product_tbl_order+='<tr  style="border-bottom:1px solid #D2EEE9;"><td width="40px" style="text-align:center; padding-left:5px;"><input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">&nbsp;&nbsp;'+product_name.toUpperCase()+'</td></tr>';
+										//product_tbl_order=product_tbl_order+'<input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" >&nbsp;&nbsp;'+product_name.toUpperCase()+'</br>';
 										
 									}
-									product_tbl_order+='</table>';								
+									product_tbl_order+='</table>';	
+									//product_tbl_order+='</br></br></br>';	
+																
 									localStorage.product_tbl_str=product_tbl_order
 									//alert (localStorage.product_tbl_str);
 									
@@ -667,12 +671,13 @@ function getOrder(){
 	
 	var url = "#page_order";	
 	$.mobile.navigate(url);	
+	//location.reload();
 	//-----
 	
 	var productList=localStorage.productListStr.split('<rd>');
 	var productLength=productList.length;
-	/*//alert (localStorage.productListStr);
-	for (var i=0; i < productLength; i++){
+	//alert (localStorage.productListStr);
+	/*for (var i=0; i < productLength; i++){
 		var productArray2 = productList[i].split('<fd>');
 		var product_id2=productArray2[1];	
 		var product_name2=productArray2[0];
@@ -840,63 +845,72 @@ function lscVisitSubmit(){
 									//$("#errorChkVSubmit").html('Sorry Network not available');
 									$("#wait_image_visit_submit").hide();
 									$("#btn_visit_submit").show();									
-								}else{					
-									var resultArray = result.split('success');			
-									var result_string=resultArray[1].replace('END','');
-									var result_string=result_string.replace('<fd>','');
-										//-----------
-										//localStorage.visit_client=''
-										//localStorage.visit_type=''
-										//localStorage.scheduled_date=''
-										localStorage.marchandizingStr=''
-										localStorage.productOrderStr=''
-
-										
-										//-------------
-										$("#errorChkVSubmit").html('');
-										$("#lat").val('');
-										$("#long").val('');
-										$("#lscPhoto").val('');
-										//document.getElementById('myImage').src = '';
-										
-										$("#lat_p").val('');
-										$("#long_p").val('');								
-										
-										$("#checkLocation").html('');
-										$("#checkLocationProfileUpdate").html('');
-										
+								}else{	
+									if (result=='STARTFailed<fd>END'){
+										$("#errorChkVSubmit").html('Failed');
 										$("#wait_image_visit_submit").hide();
 										$("#btn_visit_submit").show();
-										//alert ('1');
-
-										
-										//--
-										
-										var result_string='<table style="background-image:url(result_back.png); background-repeat:no-repeat" width="300px" border="0" cellspacing="0" cellpadding="0"> '+ 
-															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
-															'<tr><td align="center" style="color:#FFF" ><div >'+result_string +'</div><div >Submitted Successfully</div><div >'+localStorage.visit_client+'</div>'+
-															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
-															'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
-															'</td></tr></table>'
-										$("#visit_result").html(result_string );
-										
-										
-										
-										
-										
-										
-										
-										// Clear localStorage
-										
 										localStorage.productOrderStr='';
-										//localStorage.visit_client='';
-										//localStorage.visit_type='';
 										
-										
-										
-										
-										var url = "#page_confirm_visit_success";	
-										$.mobile.navigate(url);
+									}
+									else{
+										var resultArray = result.split('success');			
+										var result_string=resultArray[1].replace('END','');
+										var result_string=result_string.replace('<fd>','');
+											//-----------
+											//localStorage.visit_client=''
+											//localStorage.visit_type=''
+											//localStorage.scheduled_date=''
+											localStorage.marchandizingStr=''
+											localStorage.productOrderStr=''
+	
+											
+											//-------------
+											$("#errorChkVSubmit").html('');
+											$("#lat").val('');
+											$("#long").val('');
+											$("#lscPhoto").val('');
+											//document.getElementById('myImage').src = '';
+											
+											$("#lat_p").val('');
+											$("#long_p").val('');								
+											
+											$("#checkLocation").html('');
+											$("#checkLocationProfileUpdate").html('');
+											
+											$("#wait_image_visit_submit").hide();
+											$("#btn_visit_submit").show();
+											//alert ('1');
+	
+											
+											//--
+											
+											var result_string='<table style="background-image:url(result_back.png); background-repeat:no-repeat" width="300px" border="0" cellspacing="0" cellpadding="0"> '+ 
+																'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+																'<tr><td align="center" style="color:#FFF" ><div >'+result_string +'</div><div >Submitted Successfully</div><div >'+localStorage.visit_client+'</div>'+
+																'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+																'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
+																'</td></tr></table>'
+											$("#visit_result").html(result_string );
+											
+											
+											
+											
+											
+											
+											
+											// Clear localStorage
+											
+											localStorage.productOrderStr='';
+											//localStorage.visit_client='';
+											//localStorage.visit_type='';
+											
+											
+											
+											
+											var url = "#page_confirm_visit_success";	
+											$.mobile.navigate(url);
+									}//end else
 
 								}
 							  },
