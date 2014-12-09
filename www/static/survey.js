@@ -201,209 +201,231 @@ function check_user() {
 							//$("#error_login").html(url_parameter_en);	
 							
 							
-						}else{							
-							 $("#error_login").html('Problem in encription');
-							 $("#wait_image_login").hide();
-					  		 $("#loginButton").show();	
-							// $("#error_login").html(apipath + 'encript_function?cid=' + localStorage.cid + '&user_id=' + localStorage.user_id + '&user_pass=' + localStorage.user_pass + '&synccode=' + localStorage.synccode );		
-						}
-					  },
-				  error: function(result) {	
-				     // alert ('aaaa');					 
-					  $("#wait_image_login").hide();
-					  $("#loginButton").show();
-					  $("#error_login").html('Invalid Request');
-					  
-					  var url = "#login";
-					  $.mobile.navigate(url);	
-				  }
-			  });//end ajax*/
+						
 		
-//		===================================
-		
-		
-		//Hit for login
-		if (localStorage.url_parameter_en.length >50){
-			
-			//$("#error_login").html(apipath + 'syncRep?cid=' + localStorage.cid + '&string_get=' + localStorage.url_parameter_en );
-			$.ajax({
-					 type: 'POST',
-					 url: apipath + 'syncRep?cid=' + localStorage.cid + '&string_get=' + localStorage.url_parameter_en ,
-					 success: function(result) {
-							//$("#error_login").html(result);
-							if (result==''){
-								$("#wait_image_login").hide();
-								$("#loginButton").show();
-								$("#error_login").html('Sorry Network not available');
-								
-							}else{							
-										
-								if (result.length < 100){
-									$("#wait_image_login").hide();
-									$("#loginButton").show();								
-									//$("#error_login").html(resultArray[1]);
-									
-								}else if (result.length >100){
-																	
-									if ((result.indexOf("<START>")!=-1) || (result.indexOf("<END>")!=-1)){
-										var resultArray = result.split('</USERTYPE>');
-										var user_type=resultArray[0].replace('<START><USERTYPE>','');
-										
-										
-										
-										var result_1=resultArray[1]
-										var user_typeArray = result_1.split('<fd><rd></SUBMODE>');
-										var submode=user_typeArray[0].replace('<SUBMODE>','');
-										
-										var submodeArray=user_typeArray[1].split('<fd><rd></HTTPPASS>');
-										var httppass=submodeArray[0].replace('<HTTPPASS>','');;
-										
-										var httppassArray=submodeArray[1].split('</SETTINGSMODE>');
-										var settingsmode=httppassArray[0].replace('<SETTINGSMODE>','');
-										
-										var settingArray=httppassArray[1].split('</AREASTART>');
-										var area=settingArray[0].replace('<AREASTART>','');
-										
-										var areaArray=settingArray[1].split('</BUYERSTART>');
-										var buyer=areaArray[0].replace('<BUYERSTART>','');
-										
-										var buyerArray=areaArray[1].split('</PRODUCTSTART>');
-										var product=buyerArray[0].replace('<PRODUCTSTART>','');
-										
-										var disareaArray=buyerArray[1].split('</DISTRIBUTORAREASTART>');
-										var distributorArea=disareaArray[0].replace('<DISTRIBUTORAREASTART>','');
-										
-										var distributorareaArray=disareaArray[1].split('</DISTRIBUTORCATEGORYSTART>');
-										var distributorCatagory=distributorareaArray[0].replace('<DISTRIBUTORCATEGORYSTART>','');
-										
-										
-										
-										var p_1=product.replace('<PRODUCTSTART>','');
-										var p_2=product.replace('</PRODUCTSTART>','');
-										
-										var a_1=area.replace('<AREASTART>','');
-										var a_2=area.replace('</AREASTART>','');
-										
-										var b_1=buyer.replace('<BUYERSTART>','');
-										var b_2=buyer.replace('</BUYERSTART>','');
-										
-										
-										
-										
-										
-										
-										
-										localStorage.user_type=user_type;
-										localStorage.submode=submode;
-										localStorage.httppass=httppass;
-										localStorage.settingsmode=settingsmode;
-										
-										localStorage.buyer=buyer;
-										
-										localStorage.marketListStr=a_2;
-										localStorage.productListStr=p_2;
-										localStorage.distributorListStr=resultArray[5];	
-										
-										
-										localStorage.distributorArea=distributorArea;
-										localStorage.distributorCatagory=distributorCatagory;
-
-										
-
-									
-									
-									//------------ Order Item list		
-									var productList=localStorage.productListStr.split('<rd>');
-									var productLength=productList.length;						
-									var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
-									
-									//var product_tbl_order=''
-									for (var j=0; j < productLength-1; j++){
-										var pArray = productList[j].split('<fd>');
-										
-										var product_name=pArray[0];	
-										var product_id=pArray[1];
-										var product_price=pArray[2];
-										var product_category=pArray[3];
-										
-										var product_qty='';																		
-										product_tbl_order+='<tr  style="border-bottom:1px solid #D2EEE9;"><td width="40px" style="text-align:center; padding-left:5px;"><input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">&nbsp;&nbsp;'+product_name.toUpperCase()+'</td></tr>';
-										//product_tbl_order=product_tbl_order+'<input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" >&nbsp;&nbsp;'+product_name.toUpperCase()+'</br>';
-										
-									}
-									product_tbl_order+='</table>';	
-									//product_tbl_order+='</br></br></br>';	
-																
-									localStorage.product_tbl_str=product_tbl_order
-									//alert (localStorage.product_tbl_str);
-									
-									$("#product_list_tbl").html(localStorage.product_tbl_str);
-									
-									//------------- Visit Plan Market List / Client Profile Market List / Unschedule
-									var planMarketList = localStorage.marketListStr.split('<rd>');
-									var planMarketListShowLength=planMarketList.length	
-									
-									var visitPlanMarketComb=''								
-									var profileMarketComb='';								
-									var unscheduleMarketComb='';
-									
-									for (var k=0; k < planMarketListShowLength; k++){
-										var planMarketValueArray = planMarketList[k].split('<fd>');
-										planMarketID=planMarketValueArray[0];
-										planMarketName=planMarketValueArray[1];
-										marketID=planMarketID
-										marketName=planMarketName
-										var marketNameID=planMarketName+'-'+planMarketID;
-										
-										if(planMarketID!=''){
-											unscheduleMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketNextLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
-											//visitPlanMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="visitPlanMarketNextLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
-											//profileMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketNextCProfileLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
-											}
-									}
-																	
-									//localStorage.visit_plan_marketlist_combo=visitPlanMarketComb;								
-									localStorage.unschedule_market_cmb_id=unscheduleMarketComb
-									localStorage.market_cmb_list_cp=profileMarketComb;
-									
-									
-									
-									
-									}
-									
-								
-									//---------------
-									$("#error_login").html('');
-									$("#wait_image_login").hide();
-									$("#loginButton").show();
-									
-									//----------------
-									localStorage.visit_page=""
+				//		===================================
+						//alert (localStorage.url_parameter_en.length);
+						
+						//Hit for login
+						if (localStorage.url_parameter_en.length >50){
+							
+							//$("#error_login").html(apipath + 'syncRep?cid=' + localStorage.cid + '&string_get=' + localStorage.url_parameter_en );
+							$.ajax({
+									 type: 'POST',
+									 url: apipath + 'syncRep?cid=' + localStorage.cid + '&string_get=' + localStorage.url_parameter_en ,
+									 success: function(result) {
+										  // alert (result);
+											//$("#error_login").html(result);
+											if (result==''){
+												$("#wait_image_login").hide();
+												$("#loginButton").show();
+												$("#error_login").html('Sorry Network not available');
+												
+											}else{							
 														
-									localStorage.synced='YES';
-								    var url = "#pageHome";
-									$.mobile.navigate(url);								
-									location.reload();
-									
-								}else{
-									$("#wait_image_login").hide();
-									$("#loginButton").show();
-									$("#error_login").html('Server Error');							
-									}
-							}
-						  },// end success
-					  error: function(result) {					 
-						  $("#wait_image_login").hide();
-						  $("#loginButton").show();
-						 // $("#error_login").html('Invalid Request');
-						  
-						  var url = "#login";
-						  $.mobile.navigate(url);	
-					  }
-				  });//end ajax
+												if (result.length < 100){
+													$("#wait_image_login").hide();
+													$("#loginButton").show();								
+													//$("#error_login").html(resultArray[1]);
+													
+												}else if (result.length >100){
+																					
+													if ((result.indexOf("<START>")!=-1) || (result.indexOf("<END>")!=-1)){
+														var resultArray = result.split('</USERTYPE>');
+														var user_type=resultArray[0].replace('<START><USERTYPE>','');
+														
+														
+														
+														var result_1=resultArray[1]
+														var user_typeArray = result_1.split('<fd><rd></SUBMODE>');
+														var submode=user_typeArray[0].replace('<SUBMODE>','');
+														
+														var submodeArray=user_typeArray[1].split('<fd><rd></HTTPPASS>');
+														var httppass=submodeArray[0].replace('<HTTPPASS>','');;
+														
+														var httppassArray=submodeArray[1].split('</SETTINGSMODE>');
+														var settingsmode=httppassArray[0].replace('<SETTINGSMODE>','');
+														
+														var settingArray=httppassArray[1].split('</AREASTART>');
+														var area=settingArray[0].replace('<AREASTART>','');
+														
+														var areaArray=settingArray[1].split('</BUYERSTART>');
+														var buyer=areaArray[0].replace('<BUYERSTART>','');
+														
+														var buyerArray=areaArray[1].split('</PRODUCTSTART>');
+														var product=buyerArray[0].replace('<PRODUCTSTART>','');
+														
+														var disareaArray=buyerArray[1].split('</DISTRIBUTORAREASTART>');
+														var distributorArea=disareaArray[0].replace('<DISTRIBUTORAREASTART>','');
+														
+														var distributorareaArray=disareaArray[1].split('</DISTRIBUTORCATEGORYSTART>');
+														var distributorCatagory=distributorareaArray[0].replace('<DISTRIBUTORCATEGORYSTART>','');
+														
+														
+														
+														var p_1=product.replace('<PRODUCTSTART>','');
+														var p_2=product.replace('</PRODUCTSTART>','');
+														
+														var a_1=area.replace('<AREASTART>','');
+														var a_2=area.replace('</AREASTART>','');
+														
+														var b_1=buyer.replace('<BUYERSTART>','');
+														var b_2=buyer.replace('</BUYERSTART>','');
+														
+														
+														
+														
+														
+														
+														
+														localStorage.user_type=user_type;
+														localStorage.submode=submode;
+														localStorage.httppass=httppass;
+														localStorage.settingsmode=settingsmode;
+														
+														localStorage.buyer=buyer;
+														
+														localStorage.marketListStr=a_2;
+														localStorage.productListStr=p_2;
+														localStorage.distributorListStr=resultArray[5];	
+														
+														
+														localStorage.distributorArea=distributorArea;
+														localStorage.distributorCatagory=distributorCatagory;
+				
+														
+				
+													
+													
+													//------------ Order Item list		
+													var productList=localStorage.productListStr.split('<rd>');
+													var productLength=productList.length;						
+													var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
+													
+													product_tbl_order=''
+													for (var j=0; j < productLength-1; j++){
+													
+														var pArray = productList[j].split('<fd>');
+														
+														var product_name=pArray[0];	
+														var product_id=pArray[1];
+														var product_price=pArray[2];
+														var product_category=pArray[3];
+														
+														var product_qty='';																		
+														product_tbl_order=product_tbl_order+'<tr id="'+product_id+'" onClick="tr_item(\''+product_id+'\')" style="border-bottom:1px solid #D2EEE9;"><td width="40px" style="text-align:center; padding-left:5px;"><input onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id.toUpperCase()+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">&nbsp;&nbsp;'+product_name.toUpperCase()+'</td></tr>';
+														product_tbl_order=product_tbl_order+'<tr style="background-color:#999; height:1px"><td></td><td ></td></tr>';
+														
+														
+														//product_tbl_order=product_tbl_order+'<input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" >&nbsp;&nbsp;'+product_name.toUpperCase()+'</br>';
+														
+														//product_tbl_order = product_tbl_order +'<div width:"100%" class="ui-grid-a" id="'+product_id+'" onClick="tr_item(\''+product_id+'\')">'
+				//										product_tbl_order = product_tbl_order +'<div class="ui-block-a"  style="width:40px"><input align="right" onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></div>'
+				//										product_tbl_order = product_tbl_order +'<div class="ui-block-b" style="text-align:left; vertical-align:central;width:250px" ><input readonly="True" style="background-color:#DDF8F9" value="'+product_name.toUpperCase()+'"></div>'
+				//										product_tbl_order = product_tbl_order +'</div><div style="background-color:#999; height:1px"></div>'
+														
+														
+														
+													}
+													product_tbl_order=product_tbl_order+'</table>';	
+													//product_tbl_order+='</br></br></br>';	
+																				
+													localStorage.product_tbl_str=product_tbl_order
+													//alert (localStorage.product_tbl_str);
+													$( "#product_list_tbl" ).append( localStorage.product_tbl_str );
+													//$("#product_list_tbl").html(localStorage.product_tbl_str);
+													
+													//------------- Visit Plan Market List / Client Profile Market List / Unschedule
+													var planMarketList = localStorage.marketListStr.split('<rd>');
+													var planMarketListShowLength=planMarketList.length	
+													
+													var visitPlanMarketComb=''								
+													var profileMarketComb='';								
+													var unscheduleMarketComb='';
+													
+													for (var k=0; k < planMarketListShowLength; k++){
+														var planMarketValueArray = planMarketList[k].split('<fd>');
+														planMarketID=planMarketValueArray[0];
+														planMarketName=planMarketValueArray[1];
+														marketID=planMarketID
+														marketName=planMarketName
+														var marketNameID=planMarketName+'-'+planMarketID;
+														
+														if(planMarketID!=''){
+															unscheduleMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketNextLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
+															//visitPlanMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="visitPlanMarketNextLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
+															//profileMarketComb+='<li class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-location" style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin"><a onClick="marketNextCProfileLV(\''+marketNameID+'\')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+marketNameID+'</a></li>';
+															}
+													}
+																					
+													//localStorage.visit_plan_marketlist_combo=visitPlanMarketComb;								
+													localStorage.unschedule_market_cmb_id=unscheduleMarketComb
+													localStorage.market_cmb_list_cp=profileMarketComb;
+													
+													
+													
+													
+													}
+													
+												
+													//---------------
+													$("#error_login").html('');
+													$("#wait_image_login").hide();
+													$("#loginButton").show();
+													
+													//----------------
+													localStorage.visit_page=""
+																		
+													localStorage.synced='YES';
+												    var url = "#pageHome";
+													$.mobile.navigate(url);								
+													location.reload();
+													
+												}else{
+													$("#wait_image_login").hide();
+													$("#loginButton").show();
+													$("#error_login").html('Server Error');							
+													}
+											}
+										  },// end success
+									  error: function(result) {					 
+										  $("#wait_image_login").hide();
+										  $("#loginButton").show();
+										 // $("#error_login").html('Invalid Request');
+										  
+										  var url = "#login";
+										  $.mobile.navigate(url);	
+									  }
+								  });//end ajax
 								
-			}// end enflag if
-						//-------------		
+							
+							
+							
+							}// end enflag if
+										//-------------		
+		
+		
+		
+				}else{							
+					 $("#error_login").html('Problem in encription');
+					 $("#wait_image_login").hide();
+			  		 $("#loginButton").show();	
+					// $("#error_login").html(apipath + 'encript_function?cid=' + localStorage.cid + '&user_id=' + localStorage.user_id + '&user_pass=' + localStorage.user_pass + '&synccode=' + localStorage.synccode );		
+				}
+			  },
+		  error: function(result) {	
+		     // alert ('aaaa');					 
+			  $("#wait_image_login").hide();
+			  $("#loginButton").show();
+			  $("#error_login").html('Invalid Request');
+			  
+			  var url = "#login";
+			  $.mobile.navigate(url);	
+		  }
+	  });//end ajax*/
+		
+		
+		
 		  }//end else	
 	}//function
 
@@ -667,12 +689,11 @@ function marketRetailerNext() {
 
 
 //--------------------------------- Order: Show order from home
-function getOrder(){	
+
+
+function getOrder_load(){	
 	
-	var url = "#page_order";	
-	$.mobile.navigate(url);	
-	//location.reload();
-	//-----
+	
 	
 	var productList=localStorage.productListStr.split('<rd>');
 	var productLength=productList.length;
@@ -692,12 +713,15 @@ function getOrder(){
 			var orderProductIdQtyList=orderProductList[j].split('-');
 			if(orderProductIdQtyList.length==2){
 				var orderProductId=orderProductIdQtyList[0];
-				var orderProductQty=orderProductIdQtyList[1];		
+				var orderProductQty=orderProductIdQtyList[1];	
+				
 				$("#order_qty"+orderProductId).val(orderProductQty);
+				
+				
 			}		
 		}
 	}
-	else{
+	/*else{
 		for (var i=0; i < productLength; i++){
 			var productArray2 = productList[i].split('<fd>');
 			var product_id2=productArray2[1];	
@@ -705,41 +729,113 @@ function getOrder(){
 			$("#order_qty"+product_id2).val('');
 			//alert (product_id2);
 		}	
-	}
+	}*/
+	
+	
+}
+
+
+function getOrder(){	
+	
+	var url = "#page_order";	
+	$.mobile.navigate(url);	
+	//location.reload();
+	//-----
+	
 	
 	
 }
 
 //--------------------------------- Order: Set Order data
-function getOrderData(){	
-	var productList=localStorage.productListStr.split('<rd>');
-	var productLength=productList.length;						
-	var productOrderStr='';
-	for (var j=0; j < productLength-1; j++){
-		var productArray = productList[j].split('<fd>');
-		var product_id=productArray[1];
-		var pid=$("#order_id"+product_id).val();
-		var pname=$("#order_name"+product_id).val();
-		var pqty=$("#order_qty"+product_id).val();
-		//alert (j);
-		//alert (pqty);
-		if (pqty!='' && eval(pqty) > 0){
+function getOrderData_keyup(product_id){
+	var pid=$("#order_id"+product_id).val();
+	var pname=$("#order_name"+product_id).val();
+	var pqty=$("#order_qty"+product_id).val();
+	var productOrderStr=localStorage.productOrderStr
+	var productOrderShowStr='';
+	
+	if (pqty!='' && eval(pqty) > 0 ){
+		if (productOrderStr.indexOf(product_id)==-1){
+			//alert (productOrderStr)
 			if (productOrderStr==''){
 				productOrderStr=pid+'-'+pqty
 				productOrderShowStr=pname+'('+pqty+')'
 			}else{
-				productOrderStr+='_'+pid+'-'+pqty
+				productOrderStr=productOrderStr+'_'+pid+'-'+pqty
 				productOrderShowStr+=', '+pname+'('+pqty+')'
-				}		
+			}	
 		}
+		else{
+			
+			var orderProductList=localStorage.productOrderStr.split('_');
+			var orderProductLength=orderProductList.length;
+			for (var j=0; j < orderProductLength; j++){
+			var orderProductIdQtyList=orderProductList[j].split('-');
+				if(orderProductIdQtyList.length==2){
+					var orderProductId=orderProductIdQtyList[0];
+					var orderProductQty=orderProductIdQtyList[1];
+					if (orderProductId==pid){
+						productOrderStr=productOrderStr.replace(orderProductList[j], "")
+						
+						
+						if (productOrderStr==''){
+							productOrderStr=orderProductId+'-'+orderProductQty
+							productOrderShowStr=pname+'('+orderProductQty+')'
+						}else{
+							productOrderStr+='_'+orderProductId+'-'+orderProductQty
+							productOrderShowStr+=', '+pname+'('+orderProductQty+')'
+							}		
+									
+						
+						
+					}
+					
+				}
+			}
+			
+		}
+		localStorage.productOrderStr=productOrderStr;
+		
+		
+	}
+	else{
+		var orderProductList=localStorage.productOrderStr.split('_');
+		var orderProductLength=orderProductList.length;
+		
+		for (var j=0; j < orderProductLength; j++){
+		var orderProductIdQtyList=orderProductList[j].split('-');
+			if(orderProductIdQtyList.length==2){
+				var orderProductId=orderProductIdQtyList[0];
+				product_index=productOrderStr.indexOf(product_id)
+				if (orderProductId==pid){
+					if (orderProductLength>1){
+						if (product_index==0){
+							productOrderStr=productOrderStr.replace(orderProductList[j]+'_', "")
+						}
+						if (product_index > 0){
+							productOrderStr=productOrderStr.replace('_'+orderProductList[j], "")
+						}
+					}
+					if (orderProductLength==1){
+							productOrderStr=productOrderStr.replace(orderProductList[j], "")
+						
+					}
+					
+					
+					
+				}
+			}
+		}
+	
+		localStorage.productOrderStr=productOrderStr
 	}
 	
 	
 	
-	
-	localStorage.productOrderStr=productOrderStr
 	//alert (localStorage.productOrderStr);
 	
+}
+function getOrderData(){	
 	var url = "#page_cart";	
 	$.mobile.navigate(url);	
 		
@@ -850,7 +946,7 @@ function lscVisitSubmit(){
 										$("#errorChkVSubmit").html('Failed');
 										$("#wait_image_visit_submit").hide();
 										$("#btn_visit_submit").show();
-										localStorage.productOrderStr='';
+										//localStorage.productOrderStr='';
 										
 									}
 									else{
@@ -884,7 +980,7 @@ function lscVisitSubmit(){
 	
 											
 											//--
-											
+											//alert (result_string);
 											var result_string='<table style="background-image:url(result_back.png); background-repeat:no-repeat" width="300px" border="0" cellspacing="0" cellpadding="0"> '+ 
 																'<tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr><tr><td style="color:#FFF" >&nbsp;</td></tr>'+      
 																'<tr><td align="center" style="color:#FFF" ><div >'+result_string +'</div><div >Submitted Successfully</div><div >'+localStorage.visit_client+'</div>'+
@@ -902,6 +998,15 @@ function lscVisitSubmit(){
 											// Clear localStorage
 											
 											localStorage.productOrderStr='';
+											var productList=localStorage.productListStr.split('<rd>');
+											var productLength=productList.length;
+											for (var i=0; i < productLength; i++){
+												var productArray2 = productList[i].split('<fd>');
+												var product_id2=productArray2[1];	
+												var product_name2=productArray2[0];
+												$("#order_qty"+product_id2).val('');
+												//alert (product_id2);
+											}	
 											//localStorage.visit_client='';
 											//localStorage.visit_type='';
 											
@@ -964,7 +1069,7 @@ function search_item() {
 	 
 	
 	vfinal=p_name.toUpperCase()
-	
+	//alert (vfinal);
 	
 	
 	
@@ -972,9 +1077,9 @@ function search_item() {
 	var productLength=productList.length;										
 	for (var j=0; j < productLength; j++){				
 		var orderItemArray = productList[j].split('<fd>');
-		var product_name=orderItemArray[0];	
+		var product_name=orderItemArray[0].toUpperCase();
 		var product_id=orderItemArray[1];
-		
+		//alert (product_name)
 		if (product_name.indexOf(vfinal)==0){
 			//alert (product_name);
 			jQuery("#order_qty"+product_id).focus().select();
@@ -989,6 +1094,15 @@ function search_item() {
 
 //--------------------Item Search End----------------
 
+//--------------------Item qty on tr touch start----------------
+function tr_item(product_id) {	
+
+	jQuery("#order_qty"+product_id).focus().select();
+	
+}
+
+
+//--------------------Item qty on tr touch End----------------
 //--------------------cart Start----------------
 function cart_data() {	
 	
@@ -1002,13 +1116,18 @@ function cart_data() {
 			if(orderProductIdQtyList.length==2){
 				var orderProductId=orderProductIdQtyList[0];
 				var orderProductQty=orderProductIdQtyList[1];
-				//alert (orderProductId+'    '+orderProductQty);
-				var product_name=$("#order_name"+orderProductId).val(); 
-				var product_price=$("#order_price"+orderProductId).val(); 
-				var total= parseFloat(product_price)* parseFloat(orderProductQty);
-				total_value=total_value+total;
-				//alert (orderProductQty);
-				product_tbl_cart_str=product_tbl_cart_str+'<tr  style="border-bottom:1px solid #D2EEE9;"><td width="20%" style="text-align:center; padding-left:5px;">'+orderProductQty+'</td><td width="80%" style="text-align:left;">&nbsp;&nbsp;'+product_name+'</td></tr>';
+				
+				if ( parseFloat(orderProductQty) > 0){
+					//alert (orderProductId+'    '+orderProductQty);
+					var product_name=$("#order_name"+orderProductId).val(); 
+					var product_price=$("#order_price"+orderProductId).val(); 
+					
+					
+					var total= parseFloat(product_price)* parseFloat(orderProductQty);
+					total_value=total_value+total;
+					//alert (orderProductQty);
+					product_tbl_cart_str=product_tbl_cart_str+'<tr  style="border-bottom:1px solid #D2EEE9;"><td width="20%" style="text-align:center; padding-left:5px;">'+orderProductQty+'</td><td width="80%" style="text-align:left;">&nbsp;&nbsp;'+product_name+'</td></tr>';
+				}
 				}
 		
 		}
@@ -1032,8 +1151,18 @@ function cart_data() {
 //----------------------cart end----------------
 function cancel_cart() {
 	localStorage.productOrderStr='';	
-	getOrder()
+	//getOrder()
 	//alert ('nadira');
+	var productList=localStorage.productListStr.split('<rd>');
+	var productLength=productList.length;
+	
+	for (var i=0; i < productLength; i++){
+			var productArray2 = productList[i].split('<fd>');
+			var product_id2=productArray2[1];	
+			var product_name2=productArray2[0];
+			$("#order_qty"+product_id2).val('');
+			//alert (product_id2);
+		}	
 	var url = "#page_market_ret";	
 	$.mobile.navigate(url);
 }

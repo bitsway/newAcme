@@ -175,10 +175,7 @@
 		}
 		
 		
-		//if (localStorage.productOrderStr.length > 0){
-//			alert (localStorage.productOrderStr.length);
-//			getOrder();
-//		}
+			getOrder_load();
 		
 		
 	});
@@ -525,7 +522,7 @@
                                 
                 <br><br><br><br><br><br><br><br><br><br>
                 
-                <input name="clear_auth_check" id="clear_auth_check" data-mini="true" type="checkbox" value="Yes">
+                <input  name="clear_auth_check" id="clear_auth_check" data-mini="true" type="checkbox" value="Yes">
                 <label for="clear_auth_check">Confirm Clear Authorization</label>
                 
                 <a data-role="button" onClick="clear_autho();" >Clear Authorization</a>
@@ -1123,6 +1120,7 @@
                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
                     <td width="1%">&nbsp;</td>
+                    <td align="left"><a data-role="button" href="#page_visit"  ><img src="back.png"></a></td>
                     <td width="50%"> <input type="text" data-iconpos="right" name="item_search" id="item_search"  ></td>
                     <td width="10%px"><a data-role="button" onClick="search_item();" style="height:15px" ><img src="search.png"></a></td>
                     <td align="right"><a data-role="button" onClick="getOrderData();cart_data()" ><img src="next.png"></a>&nbsp;&nbsp;</td>
@@ -1188,7 +1186,7 @@
 			
             </div><!--/cont-->
 			
-			<div data-theme="c" data-role="footer" data-position="fixed" align="center"> <a data-role="button" href="#page_visit"  ><img src="back.png"></a></div>
+			<!--<div data-theme="c" data-role="footer" data-position="fixed" align="center"> <a data-role="button" href="#page_visit"  ><img src="back.png"></a></div>-->
 		
 			
 		 </div><!--/page-->
@@ -1441,12 +1439,12 @@
              <br/>
              <div id="product_total_last" style=" color:#009191; font-weight:bold"></div>     
               </br>      
-			<a data-role="button" onClick="getLocationInfo();" >Confirm Location</a>            
+			<!--<a data-role="button" onClick="getLocationInfo();" >Confirm Location</a>-->            
             
 			<div id="checkLocation" style="color:#009191;"></div>
             
 			<br/>
-            <br/>
+            
             
 			<a data-role="button" id="btn_visit_submit" onClick="lscVisitSubmit();" >Submit</a>
 			<div align="center"><img id="wait_image_visit_submit" style="" width="50px;" src="loading.gif" alt=""></div>
@@ -2114,7 +2112,8 @@
 		 </div><!--/page-->
 
     <script type="text/javascript" src="phonegap.js"></script>
-    
-    
+   
+   <!--<input readonly="True" style="background-color:#DDF8F9"-->
+  
     </body>
 </html>
