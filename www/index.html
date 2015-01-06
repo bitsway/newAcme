@@ -4,22 +4,21 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>M-reporting</title>
+        <title>mReporting</title>
 		<link rel="stylesheet" href="static/my.css" />
 		<link rel="stylesheet" href="static/themes/c.min.css" />
 		<link rel="stylesheet" href="static/themes/jquery.mobile.icons.min.css" />
-		
-		<link rel="stylesheet" href="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.css" />
-        <script src="static/jquery/1.10.2/jquery-1.10.2.min.js">   </script>
-        <script src="static/jquery.mobile-1.4.0/jquery.mobile-1.4.0.min.js">   </script>
-		<script src="static/survey.js"></script>		
-		
+		<link rel="stylesheet" href="static/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css" />
+        
+		<script src="static/jquery/jquery-2.1.3.min.js">   </script>
+        <script src="static/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js">   </script>
+		<script src="static/survey.js"></script>
         <!--chart-->
 		<link rel="stylesheet" href="static/jchart/styles/jchartfx.css" type="text/css" />
-		<script src="static/jchart/js/jchartfx.system.js"></script>
+		<!--<script src="static/jchart/js/jchartfx.system.js"></script>
         <script src="static/jchart/js/jchartfx.coreVector.js"></script>
         <script src="static/jchart/js/jchartfx.advanced.js"></script>
-        <script src="static/jchart/js/jchartfx.animation.js"></script>
+        <script src="static/jchart/js/jchartfx.animation.js"></script>-->
 		
         <style type="text/css">
 			.jchartfx .Title {
@@ -32,55 +31,55 @@
 		<!--end chart-->
     
     <script type="text/javascript" language="javascript">   
-	var chart1;
-	var chart2;
-    function loadChart()
-      {
-		//------------------------Brand wise		
-		chart1 = new cfx.Chart();
-		chart1.getData().setSeries(1);
-		var series1 = chart1.getSeries().getItem(0);		
-		chart1.setGallery(cfx.Gallery.Pie);
-		
-		var title1 = new cfx.TitleDockable();
-		title1.setText("Retailer Stock");
-		title1.setAlignment(cfx.StringAlignment.Center);		
-		chart1.getTitles().add(title1);
-		
-		//chart1.getDataGrid().setVisible(true);
-		//chart1.getPoints().getItem(0, 2).setColor("#FC7474");
-		
-		var gb;
-		gb = new cfx.GradientBackground();
-		gb.setType(cfx.GradientType.BackwardDiagonal);
-		gb.setColorFrom("#DEEFEF");
-		gb.setColorTo("#D6EBEB");
-		gb.getPosition().add(0);
-		gb.getPosition().add(1);
-		gb.getPosition().add(2);		
-		chart1.setBackground(gb);
-		
-		//chart1.getBorder().setColor("#D8EBEB");
-		
-		/*var border1 = new cfx.VectorBorder();
-		border1.setTemplate("BorderRoundShadow");
-		chart1.setBorder(border1);*/
-		
-		//chart1.setBorder(null);
-		
-		var dataPtype= new Array();
-		dataPtype=eval($('#retailerStock').val());
-		
-		chart1.setDataSource(dataPtype);
-		chart1.getAllSeries().getPointLabels().setVisible(true);
-		chart1.getLegendBox().setVisible(false);
-		
-		var divHolder1 = document.getElementById('ChartDivRetStock');
-		chart1.create(divHolder1); 
-		
-		//---------------------------------------------------------
-				
-	}
+	//var chart1;
+//	var chart2;
+//    function loadChart()
+//      {
+//		//------------------------Brand wise		
+//		chart1 = new cfx.Chart();
+//		chart1.getData().setSeries(1);
+//		var series1 = chart1.getSeries().getItem(0);		
+//		chart1.setGallery(cfx.Gallery.Pie);
+//		
+//		var title1 = new cfx.TitleDockable();
+//		title1.setText("Retailer Stock");
+//		title1.setAlignment(cfx.StringAlignment.Center);		
+//		chart1.getTitles().add(title1);
+//		
+//		//chart1.getDataGrid().setVisible(true);
+//		//chart1.getPoints().getItem(0, 2).setColor("#FC7474");
+//		
+//		var gb;
+//		gb = new cfx.GradientBackground();
+//		gb.setType(cfx.GradientType.BackwardDiagonal);
+//		gb.setColorFrom("#DEEFEF");
+//		gb.setColorTo("#D6EBEB");
+//		gb.getPosition().add(0);
+//		gb.getPosition().add(1);
+//		gb.getPosition().add(2);		
+//		chart1.setBackground(gb);
+//		
+//		//chart1.getBorder().setColor("#D8EBEB");
+//		
+//		/*var border1 = new cfx.VectorBorder();
+//		border1.setTemplate("BorderRoundShadow");
+//		chart1.setBorder(border1);*/
+//		
+//		//chart1.setBorder(null);
+//		
+//		var dataPtype= new Array();
+//		dataPtype=eval($('#retailerStock').val());
+//		
+//		chart1.setDataSource(dataPtype);
+//		chart1.getAllSeries().getPointLabels().setVisible(true);
+//		chart1.getLegendBox().setVisible(false);
+//		
+//		var divHolder1 = document.getElementById('ChartDivRetStock');
+//		chart1.create(divHolder1); 
+//		
+//		//---------------------------------------------------------
+//				
+//	}
 </script>
 	
     
@@ -497,7 +496,7 @@
                 </div>
                  
                 </div>	
-                <div data-theme="c" data-role="footer" data-position="fixed"></div>			
+                <!--<div data-theme="c" data-role="footer" data-position="fixed"></div>	-->		
             </div>
 		
 
@@ -532,7 +531,7 @@
             </div>
 			
         <!-- ==========footer====== -->	
-        <div data-theme="c" data-role="footer" data-position="fixed"></div>
+        <!--<div data-theme="c" data-role="footer" data-position="fixed"></div>-->
         
         </div>		
 
@@ -855,7 +854,7 @@
                 
             </div><!--/cont-->
 			
-			<div data-theme="c" data-role="footer" data-position="fixed"></div>
+			<!--<div data-theme="c" data-role="footer" data-position="fixed"></div>-->
 			
 			<!--panel-->	
 			
@@ -1111,60 +1110,62 @@
 
 </div> 
 
+
 <!--=====================order Page==================-->
 		<div data-theme="c" data-role="page" id="page_order">
             <div data-theme="c" data-role="header" data-position="fixed">
 			<!--<a  data-role="button" href="#pageHome" class="ui-btn-left ui-btn-icon-notext"><img src="menu.png"></a>-->
-            
-               
-               <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <!--<a data-role="button" data-rel="back"  data-icon="arrow-l" data-iconpos="left" class="ui-btn-right">Back</a>-->
+               <!-- <h3>Order</h3>-->
+                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>
-                    <td width="1%">&nbsp;</td>
-                    <td align="left"><a data-role="button" href="#page_visit"  ><img src="back.png"></a></td>
-                    <td width="50%"> <input type="text" data-iconpos="right" name="item_search" id="item_search"  ></td>
-                    <td width="10%px"><a data-role="button" onClick="search_item();" style="height:15px" ><img src="search.png"></a></td>
-                    <td align="right"><a data-role="button" onClick="getOrderData();cart_data()" ><img src="next.png"></a>&nbsp;&nbsp;</td>
+                    <!--<td align="left"><a data-role="button" href="#page_visit"  ><img src="back.png"></a></td>-->
+                    <td width="70%"><input id="item_combo_id" data-type="search" placeholder="Search" value="Search" onFocus="check_search()"> 	<!--<input type="text" data-iconpos="right" name="item_search" id="item_search"  >--></td>
+                    <td width="10%px"><!--<a data-role="button" onClick="search_item();" style="height:15px" ><img src="search.png"></a>--></td>
+                    <!--<td align="right"><a data-role="button" onClick="getOrderData();cart_data()" ><img src="next.png"></a>&nbsp;&nbsp;</td>-->
+					 <td align="right"><a data-role="button" onClick="getOrderData();" ><img src="next.png"></a>&nbsp;&nbsp;</td>
                   </tr>
                 </table>
-
-               
-                
             </div>
 			
+			
+			<!--<div data-theme="a" data-role="header" data-position="fixed">
+                <div style="text-align:left;padding-top:5px;padding-left:3px;">
+                    <img src="/images/mylogo.png" alt="Logo" />
+                </div>
+            </div>-->
+			
             <div data-role="content" style="overflow:scroll">
-            
-            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td > <span class="visit_client" style="font-weight:bold"></span></td>
-                    <td ></td>
-                    <td>&nbsp;</td>
-                  </tr>
-                </table>
-            
-            	
-                
 				<div id="myerror" style="color:#C00"></div>
 				<!--<ul data-inset="true"  data-role="listview">
 					<li>
-						<div><b>Visit Type & Date: nadira</b><span class="visit_type"></span>&nbsp;&nbsp;<span class="s_date"></span></div>						
+						<div><b>Visit Type & Date:</b><span class="visit_type"></span>&nbsp;&nbsp;<span class="s_date"></span></div>						
 						<div><b>Market :</b><span class="market"></span></div>
-                        <div><b>Distributor :</b><span class="visit_distributor"></span></div>
-                        <div><b>Retailer :</b><span class="visit_client" style="font-weight:bold"></span></div>                        
+                      <div><b>Distributor :</b><span class="visit_distributor"></span></div>
+                        <div><b>Chemist :</b><span class="visit_client" style="font-weight:bold"></span></div>                        
 					</li>					
 				</ul>-->
-				<!--<input type="text" name="item_search" id="item_search"  style="background-color:#FFE6E6; font-weight:bold; "  value="" onKeyUp="search_item();">-->
-
+				
+				<div><b></b><span class="market" style="font-size:24px;color:#009191"></span></div>
+				<div><b></b><span class="visit_client" style="font-weight:bold;font-size:24px;color:#009191"></span></div>
+				
+							
+                
+             
 				
 				
-			
+				<div id="product_list_tbl">
 				
 				
-				<div id="product_list_tbl" ></div>
+				
+                
+				
+				
+				
+				</div>
 				
                 <br>
                 <br>
-                <!--<a data-role="button" data-rel="back"  ><img src="back.png"></a>-->
-               
 			  
 			
             <br>                        
@@ -1186,12 +1187,13 @@
 			
             </div><!--/cont-->
 			
-			<!--<div data-theme="c" data-role="footer" data-position="fixed" align="center"> <a data-role="button" href="#page_visit"  ><img src="back.png"></a></div>-->
-		
+			
+			<div data-theme="c" data-role="footer" data-position="fixed">
+            
+           &nbsp; <a data-role="button" href="#page_visit"  ><img src="back.png"></a>
+            </div>
 			
 		 </div><!--/page-->
-
-
 
 <!--=====================cart Page==================-->
 		<div data-theme="c" data-role="page" id="page_cart">
@@ -1225,12 +1227,14 @@
 				
 
 				
-				
+				 <br>
+                <br>
 			
 				
 				
 				<div id="product_list_tbl_cart"></div>
-                
+                 <br>
+                <br>
                 <div id="product_total_cart" style=" color:#009191; font-weight:bold"></div>
 				
                 <br>

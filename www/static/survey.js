@@ -300,9 +300,10 @@ function check_user() {
 													//------------ Order Item list		
 													var productList=localStorage.productListStr.split('<rd>');
 													var productLength=productList.length;						
-													var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
+													//var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
 													
-													product_tbl_order=''
+													var product_tbl_order=''
+													product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true">'
 													for (var j=0; j < productLength-1; j++){
 													
 														var pArray = productList[j].split('<fd>');
@@ -313,26 +314,31 @@ function check_user() {
 														var product_category=pArray[3];
 														
 														var product_qty='';																		
-														product_tbl_order=product_tbl_order+'<tr id="'+product_id+'" onClick="tr_item(\''+product_id+'\')" style="border-bottom:1px solid #D2EEE9;"><td width="40px" style="text-align:center; padding-left:5px;"><input onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id.toUpperCase()+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">&nbsp;&nbsp;'+product_name.toUpperCase()+'</td></tr>';
-														product_tbl_order=product_tbl_order+'<tr style="background-color:#999; height:1px"><td></td><td ></td></tr>';
+													
+													//	product_tbl_order=product_tbl_order+'<tr id="'+product_id+'"  style="border-bottom:1px solid #D2EEE9;"><td width="50px" style="text-align:center; padding-left:5px;"><input onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id.toUpperCase()+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+product_name.toUpperCase()+'</td></tr>';
+													//	product_tbl_order=product_tbl_order+'<tr style="background-color:#999; height:1px"><td></td><td ></td></tr>';
 														
 														
-														//product_tbl_order=product_tbl_order+'<input type="number" id="order_qty'+product_id+'" value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" >&nbsp;&nbsp;'+product_name.toUpperCase()+'</br>';
-														
-														//product_tbl_order = product_tbl_order +'<div width:"100%" class="ui-grid-a" id="'+product_id+'" onClick="tr_item(\''+product_id+'\')">'
-				//										product_tbl_order = product_tbl_order +'<div class="ui-block-a"  style="width:40px"><input align="right" onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></div>'
-				//										product_tbl_order = product_tbl_order +'<div class="ui-block-b" style="text-align:left; vertical-align:central;width:250px" ><input readonly="True" style="background-color:#DDF8F9" value="'+product_name.toUpperCase()+'"></div>'
-				//										product_tbl_order = product_tbl_order +'</div><div style="background-color:#999; height:1px"></div>'
+														product_tbl_order=product_tbl_order+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input onBlur="getOrderData_keyup(\''+product_id+'\')" type="number" id="order_qty'+product_id+'"  value="'+product_qty+'" placeholder="0" ><input type="hidden" id="order_id'+product_id+'" value="'+product_id+'" ><input type="hidden" id="order_price'+product_id+'" value="'+product_price+'" ><input type="hidden" id="order_name'+product_id.toUpperCase()+'" value="'+product_name.toUpperCase()+'" placeholder="qty" ></td><td  style="text-align:left;">'+'<font id="'+ product_id +'" onClick="tr_item(\''+product_id+'\')" >'+ product_name.toUpperCase()+'</font></td></tr>'+'</table>'+'</li>'
 														
 														
 														
 													}
-													product_tbl_order=product_tbl_order+'</table>';	
-													//product_tbl_order+='</br></br></br>';	
+													product_tbl_order=product_tbl_order+'</ul>';	
 																				
 													localStorage.product_tbl_str=product_tbl_order
-													//alert (localStorage.product_tbl_str);
-													$( "#product_list_tbl" ).append( localStorage.product_tbl_str );
+													
+													
+													
+													
+													$("#product_list_tbl").html(localStorage.product_tbl_str);
+													
+													//var item_combo_ob=$('#item_combo_id_lv');
+//													item_combo_ob.empty()
+//													item_combo_ob.append(product_tbl_order);
+													
+													
+													//alert (localStorage.product_tbl_str)
 													//$("#product_list_tbl").html(localStorage.product_tbl_str);
 													
 													//------------- Visit Plan Market List / Client Profile Market List / Unschedule
@@ -754,6 +760,11 @@ function getOrderData_keyup(product_id){
 	var productOrderStr=localStorage.productOrderStr
 	var productOrderShowStr='';
 	
+	
+	if ((eval(pqty) < 1) || (pqty == false)){
+		$("#order_qty"+product_id).val('')
+	}
+	
 	if (pqty!='' && eval(pqty) > 0 ){
 		if (productOrderStr.indexOf(product_id)==-1){
 			//alert (productOrderStr)
@@ -836,6 +847,7 @@ function getOrderData_keyup(product_id){
 	
 }
 function getOrderData(){	
+	cart_data();
 	var url = "#page_cart";	
 	$.mobile.navigate(url);	
 		
@@ -1109,7 +1121,8 @@ function cart_data() {
 	if (localStorage.productOrderStr.length >0){
 		var orderProductList=localStorage.productOrderStr.split('_');
 		var orderProductLength=orderProductList.length;
-		var product_tbl_cart_str='<table border="1" width="100%"  bordercolor="#CCCCCC" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
+		//var product_tbl_cart_str='<table border="1" width="100%"  bordercolor="#CCCCCC" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
+		var product_tbl_cart_str='<ul  data-role="listview">';
 		var total_value=0
 		for (var j=0; j < orderProductLength; j++){
 			var orderProductIdQtyList=orderProductList[j].split('-');
@@ -1126,17 +1139,30 @@ function cart_data() {
 					var total= parseFloat(product_price)* parseFloat(orderProductQty);
 					total_value=total_value+total;
 					//alert (orderProductQty);
-					product_tbl_cart_str=product_tbl_cart_str+'<tr  style="border-bottom:1px solid #D2EEE9;"><td width="20%" style="text-align:center; padding-left:5px;">'+orderProductQty+'</td><td width="80%" style="text-align:left;">&nbsp;&nbsp;'+product_name+'</td></tr>';
+					//product_tbl_cart_str=product_tbl_cart_str+'<tr  style="border-bottom:1px solid #D2EEE9;"><td width="20%" style="text-align:center; padding-left:5px;">'+orderProductQty+'</td><td width="80%" style="text-align:left;">&nbsp;&nbsp;'+product_name+'</td></tr>';
+					//alert (orderProductId)
+					
+					product_tbl_cart_str=product_tbl_cart_str+'<li  style="border-bottom-style:solid; border-color:#CBE4E4;border-bottom-width:thin">'+'<table width="100%" border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="border-radius:5px;">'+'<tr style="border-bottom:1px solid #D2EEE9;"><td width="60px" style="text-align:center; padding-left:5px;"><input  type="number" id="cart_qty'+orderProductId+'"  onBlur="getCartData_keyup(\''+orderProductId+'\')" value="'+orderProductQty+'" placeholder="0" </td><td  style="text-align:left;">'+ product_name.toUpperCase()+'</td></tr>'+'</table>'+'</li>'
+					
+					
 				}
 				}
 		
 		}
-		product_tbl_cart_str=product_tbl_cart_str+'</table>';								
+		product_tbl_cart_str=product_tbl_cart_str+'</ul>';	
+		//product_tbl_cart_str=product_tbl_cart_str+'</table>';								
 		localStorage.product_tbl_cart=product_tbl_cart_str
 		localStorage.total_value=total_value.toFixed(2);
-		$("#product_list_tbl_cart").html(localStorage.product_tbl_cart);
+		//$("#product_list_tbl_cart").html('');
+//		$("#product_list_tbl_cart").html(localStorage.product_tbl_cart);
+		$('#product_list_tbl_cart').empty();
+		$('#product_list_tbl_cart').append(localStorage.product_tbl_cart).trigger('create');
+		
+		
 		$("#product_total_cart").html("Total Order Amount: "+localStorage.total_value + " BDT");
 		$("#product_total_last").html("Total Order Amount: "+localStorage.total_value + " BDT");
+		
+		
 
 	}
 	else{
@@ -1148,6 +1174,147 @@ function cart_data() {
 	
 	
 }
+
+//===================set  cart data====================
+function getCartData_keyup(product_id){
+	var pid=$("#order_id"+product_id).val();
+	var pname=$("#order_name"+product_id).val();
+	var pqty=$("#cart_qty"+product_id).val();
+	
+//	alert (localStorage.productOrderStr);
+	
+	
+	$("#order_qty"+product_id).val(pqty);
+	var productOrderStr=localStorage.productOrderStr
+	
+	//alert (productOrderStr)
+	var productOrderShowStr='';
+	if ((eval(pqty) < 1) || (pqty == false)){
+		$("#order_qty"+product_id).val('')
+	}
+	
+	if (pqty!='' && eval(pqty) > 0 ){
+		if (productOrderStr.indexOf(product_id)==-1){
+			if (productOrderStr==''){
+				productOrderStr=pid+'-'+pqty
+				productOrderShowStr=pname+'('+pqty+')'
+			}else{
+				productOrderStr=productOrderStr+'_'+pid+'-'+pqty
+				productOrderShowStr=productOrderShowStr+', '+pname+'('+pqty+')'
+			}	
+		}
+		else{			
+			var orderProductList=localStorage.productOrderStr.split('_');
+			var orderProductLength=orderProductList.length;
+			for (var j=0; j < orderProductLength; j++){
+				var orderProductIdQtyList=orderProductList[j].split('-');
+				//alert (pqty);
+				if(orderProductIdQtyList.length==2){
+					var orderProductId=orderProductIdQtyList[0];
+					var orderProductQty=orderProductIdQtyList[1];
+					
+					if (orderProductId==pid){
+						//productOrderStr=productOrderStr.replace(orderProductList[j], "")
+						product_index=productOrderStr.indexOf(product_id)
+						if (product_index==0){
+							productOrderStr=productOrderStr.replace(orderProductList[j]+'_', "")
+						}
+						if (product_index > 0){
+							productOrderStr=productOrderStr.replace('_'+orderProductList[j], "")
+						}
+						
+						
+						if (productOrderStr==''){
+							productOrderStr=pid+'<fd>'+pqty
+							productOrderShowStr=pname+'('+pqty+')'
+						}else{
+							productOrderStr=productOrderStr+'_'+orderProductId+'-'+pqty
+							productOrderShowStr=productOrderShowStr+', '+pname+'('+pqty+')'
+						}		
+									
+					}//if (orderProductId==pid){
+					
+				}//if(orderProductIdQtyList.length==2){
+			}//for
+			
+		}//else
+		localStorage.productOrderStr=productOrderStr;
+		
+		
+	}
+	else{
+		var orderProductList=localStorage.productOrderStr.split('_');
+		var orderProductLength=orderProductList.length;
+		
+		for (var j=0; j < orderProductLength; j++){
+		var orderProductIdQtyList=orderProductList[j].split('-');
+			if(orderProductIdQtyList.length==2){
+				var orderProductId=orderProductIdQtyList[0];
+				product_index=productOrderStr.indexOf(product_id)
+				if (orderProductId==pid){
+					if (orderProductLength>1){
+						if (product_index==0){
+							productOrderStr=productOrderStr.replace(orderProductList[j]+'_', "")
+						}
+						if (product_index > 0){
+							productOrderStr=productOrderStr.replace('_'+orderProductList[j], "")
+						}
+					} //if (orderProductLength>1){
+					if (orderProductLength==1){
+							productOrderStr=productOrderStr.replace(orderProductList[j], "")
+						
+					} //if (orderProductLength==1
+				
+				} //if (orderProductId==pid)
+					
+					
+					
+				}//if(orderProductIdQtyList.length==2)
+			}//for
+		}//else
+	
+		localStorage.productOrderStr=productOrderStr
+		
+		//alert (localStorage.productOrderStr);
+		//================price===========
+		//alert (localStorage.productOrderStr);
+		if (localStorage.productOrderStr.length >0){
+		var orderProductList=localStorage.productOrderStr.split('_');
+		var orderProductLength=orderProductList.length;
+		$("#product_total_cart").text(localStorage.productOrderStr);
+		var total_value=0
+		for (var j=0; j < orderProductLength; j++){
+			var orderProductIdQtyList=orderProductList[j].split('-');
+			if(orderProductIdQtyList.length==2){
+				var orderProductId=orderProductIdQtyList[0];
+				var orderProductQty=orderProductIdQtyList[1];
+				
+				
+				var product_price=$("#order_price"+orderProductId).val(); 
+				//alert (product_price);
+				var total= parseFloat(product_price)* parseFloat(orderProductQty);
+				total_value=total_value+total;
+
+				
+				
+				}
+		
+		}
+		
+		
+		
+		//alert (total_value)
+		localStorage.total_value=total_value.toFixed(2);
+		
+		$("#product_total_cart").html("Total Order Amount: "+localStorage.total_value + " BDT");
+		$("#product_total_last").html("Total Order Amount: "+localStorage.total_value + " BDT");
+
+	}
+		
+		
+//		==================================
+	}
+
 //----------------------cart end----------------
 function cancel_cart() {
 	localStorage.productOrderStr='';	
@@ -1165,4 +1332,14 @@ function cancel_cart() {
 		}	
 	var url = "#page_market_ret";	
 	$.mobile.navigate(url);
+}
+
+function check_search() {
+	var check_s=$("#item_combo_id").val();
+	//alert (check_s);
+	if (check_s=='Search'){
+		$("#item_combo_id").val('');
+		$("#item_combo_id").focus();
+	}
+	
 }
