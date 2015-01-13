@@ -157,7 +157,60 @@ function check_user() {
 	var base_url='';
 	var photo_url='';
 	
-	
+	//===============
+		localStorage.marketListStr='';
+		localStorage.productListStr='';
+		localStorage.marchandizingItem='';
+		localStorage.distributorListStr='';	
+		localStorage.synced=''
+		
+		localStorage.client_string=''	
+		localStorage.visit_client=''
+		
+		localStorage.visit_type=''
+		localStorage.scheduled_date=''
+		localStorage.visitMarketStr=''
+		localStorage.visit_distributor_nameid=''
+		localStorage.marchandizingStr=''
+		localStorage.clientProfileStr=''
+		
+			
+		localStorage.product_tbl_str=''
+		
+		localStorage.product_tbl_del_str=''
+		
+		localStorage.distributor_name=''
+		localStorage.delivery_date=''
+		localStorage.dis_client_string=''
+		
+		localStorage.plan_market=''
+		localStorage.plan_date=''
+		
+		localStorage.m_plan_client_string=''
+		localStorage.plan_ret_name=''
+		
+		localStorage.marketInfoStr=''
+		localStorage.marketInfoSubmitStr=''
+		localStorage.productOrderStr=''
+		localStorage.marchandizingInfoStr=''
+		
+		localStorage.visit_plan_marketlist_combo=''
+		localStorage.visit_plan_client_cmb_list=''
+		localStorage.delivery_distributor_cmb_list=''
+		localStorage.delivery_retailer_cmb_list=''
+		localStorage.market_cmb_list_cp=''
+		localStorage.unschedule_market_cmb_id=''
+		
+		localStorage.profile_m_client_org_id=''
+		
+		//----------
+		localStorage.campaign_string=''	
+		localStorage.visit_camp_list_str=''
+		localStorage.visit_camp_submit_str=''
+		//------
+		localStorage.brand_list_string=''
+		
+		localStorage.visit_page=""
 	//-----
 	
 	if (cid=="" || cid==undefined ||user_id=="" || user_id==undefined || user_pass=="" || user_pass==undefined){
@@ -638,6 +691,7 @@ function marketRetailerNextLV(lvalue) {
 function marketRetailerNext() {
 	$("#err_m_retailer_next").text("");
 	visit_client=$("#unscheduled_m_client_combo_id").val();		
+	$("#errorChkVSubmit").html("");
 	
 	if(visit_client=='' || visit_client==0){
 			$("#err_m_retailer_next").text("Retailer required");
@@ -985,6 +1039,8 @@ function lscVisitSubmit(){
 											
 											$("#checkLocation").html('');
 											$("#checkLocationProfileUpdate").html('');
+											$("#product_list_tbl_cart").html('');
+											
 											
 											$("#wait_image_visit_submit").hide();
 											$("#btn_visit_submit").show();
@@ -1019,8 +1075,14 @@ function lscVisitSubmit(){
 												$("#order_qty"+product_id2).val('');
 												//alert (product_id2);
 											}	
-											//localStorage.visit_client='';
+											localStorage.visit_client='';
 											//localStorage.visit_type='';
+											
+											
+											
+											
+											
+											
 											
 											
 											
