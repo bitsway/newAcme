@@ -356,7 +356,7 @@ function check_user() {
 													//var product_tbl_order='<table border="0" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
 													
 													var product_tbl_order=''
-													product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true">'
+													product_tbl_order='<ul id="item_combo_id_lv" data-role="listview" data-filter="true" data-input="#item_combo_id" data-inset="true" data-filter-reveal="true">'
 													for (var j=0; j < productLength-1; j++){
 													
 														var pArray = productList[j].split('<fd>');
@@ -1404,4 +1404,25 @@ function check_search() {
 		$("#item_combo_id").focus();
 	}
 	
+}
+//================Item search
+
+$(document).on("pagecreate", "#page_order", function(){    
+//$("item_combo_id").keyup(function(){
+    $("#item_combo_id_lv").filterable('option', 'filterCallback', startsWithSearch);
+});
+
+function startsWithSearch( idx, searchValue ) {
+    
+	var ret = false;
+    if (searchValue && searchValue.length > 0){        
+        var text = $(this).text().toUpperCase();
+        var filttext = $(this).data("filtertext") || '';
+        filttext = filttext.toUpperCase();
+        //if either text or filtertext starts with searchvalue, return false
+        if( text.lastIndexOf(searchValue.toUpperCase(), 0) != 0 && filttext.lastIndexOf(searchValue.toUpperCase(), 0) != 0){
+            ret = true; //filter this one out
+        }
+    } 
+    return ret;
 }
