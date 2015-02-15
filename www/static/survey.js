@@ -1,6 +1,6 @@
-//var apipath='http://127.0.0.1:8000/mrepmobile_new/android_acme/'
+//var apipath='http://127.0.0.1:8000/mrepmobile_new/android_acme_new/'
 //var apipath='http://m.businesssolutionapps.com/mrepmobile/android_acme/'
-var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme/'
+var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme_new/'
 
 
 var mobile_off_flag=0;
@@ -232,6 +232,9 @@ function check_user() {
 		//alert (localStorage.cid);					
 		//alert(localStorage.base_url+'check_user?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode);
 		//http://127.0.0.1:8000/lscmreporting/syncmobile/check_user?cid=LSCRM&rep_id=1001&rep_pass=123&synccode=
+		
+		
+		
 		
 //		=================================
 		//Get encripted code
