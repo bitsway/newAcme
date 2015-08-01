@@ -818,7 +818,7 @@ function getOrderData_keyup(product_id){
 	var productOrderShowStr='';
 	
 	
-	if ((eval(pqty) < 1) || (pqty == false)){
+	if ((eval(pqty) < 1) || (pqty == false) || (pqty.length > 4)){
 		$("#order_qty"+product_id).val('')
 	}
 	
@@ -905,8 +905,8 @@ function getOrderData_keyup(product_id){
 }
 function getOrderData(){	
 	cart_data();
-	var url = "#page_cart";	
-	$.mobile.navigate(url);	
+	//var url = "#page_cart";	
+//	$.mobile.navigate(url);	
 		
 	}
 
@@ -1227,7 +1227,8 @@ function cart_data() {
 		$("#product_total_cart").html("Total Order Amount: "+localStorage.total_value + " BDT");
 		$("#product_total_last").html("Total Order Amount: "+localStorage.total_value + " BDT");
 		
-		
+		var url = "#page_cart";	
+    	$.mobile.navigate(url);	
 
 	}
 	else{
