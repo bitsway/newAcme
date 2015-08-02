@@ -834,28 +834,30 @@ function getOrderData_keyup(product_id){
 			}	
 		}
 		else{
-			
+			//alert (localStorage.productOrderStr)
 			var orderProductList=localStorage.productOrderStr.split('_');
 			var orderProductLength=orderProductList.length;
 			for (var j=0; j < orderProductLength; j++){
 			var orderProductIdQtyList=orderProductList[j].split('-');
 				if(orderProductIdQtyList.length==2){
 					var orderProductId=orderProductIdQtyList[0];
-					var orderProductQty=orderProductIdQtyList[1];
+				//	var orderProductQty=orderProductIdQtyList[1];
 					if (orderProductId==pid){
+						//alert (orderProductId);
+						//alert (pid);
 						productOrderStr=productOrderStr.replace(orderProductList[j], "")
 						
-						
+						//alert (productOrderStr)
 						if (productOrderStr==''){
-							productOrderStr=orderProductId+'-'+orderProductQty
-							productOrderShowStr=pname+'('+orderProductQty+')'
+							productOrderStr=orderProductId+'-'+pqty
+							productOrderShowStr=pname+'('+pqty+')'
 						}else{
-							productOrderStr+='_'+orderProductId+'-'+orderProductQty
-							productOrderShowStr+=', '+pname+'('+orderProductQty+')'
+							//alert (pqty);
+							productOrderStr+='_'+orderProductId+'-'+pqty
+							productOrderShowStr+=', '+pname+'('+pqty+')'
+							//alert (productOrderStr);
 							}		
-									
-						
-						
+						//alert (productOrderStr);
 					}
 					
 				}
