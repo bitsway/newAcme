@@ -1257,11 +1257,11 @@ function getCartData_keyup(product_id){
 	
 	//alert (productOrderStr)
 	var productOrderShowStr='';
-	if ((eval(pqty) < 1) || (pqty == false)){
+	if ((eval(pqty) < 1) || (pqty == false) || (pqty.length > 4)){
 		$("#order_qty"+product_id).val('')
 	}
 	
-	if (pqty!='' && eval(pqty) > 0 ){
+	if (pqty!='' && eval(pqty) > 0 && (pqty.length < 5)){
 		if (productOrderStr.indexOf(product_id)==-1){
 			if (productOrderStr==''){
 				productOrderStr=pid+'-'+pqty
