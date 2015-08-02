@@ -822,7 +822,7 @@ function getOrderData_keyup(product_id){
 		$("#order_qty"+product_id).val('')
 	}
 	
-	if (pqty!='' && eval(pqty) > 0 ){
+	if (pqty!='' && eval(pqty) > 0 && (pqty.length < 5)){
 		if (productOrderStr.indexOf(product_id)==-1){
 			//alert (productOrderStr)
 			if (productOrderStr==''){
