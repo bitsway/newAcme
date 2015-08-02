@@ -1259,6 +1259,7 @@ function getCartData_keyup(product_id){
 	var productOrderShowStr='';
 	if ((eval(pqty) < 1) || (pqty == false) || (pqty.length > 4)){
 		$("#order_qty"+product_id).val('')
+		$("#cart_qty"+product_id).val('')
 	}
 	
 	if (pqty!='' && eval(pqty) > 0 && (pqty.length < 5)){
