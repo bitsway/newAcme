@@ -1,6 +1,6 @@
 //var apipath='http://127.0.0.1:8000/mrepmobile_new/android_acme_new/'
 //var apipath='http://m.businesssolutionapps.com/mrepmobile/android_acme/'
-var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme_new/'
+var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme_new_last/'
 
 
 var mobile_off_flag=0;
@@ -1189,8 +1189,11 @@ function cart_data() {
 		var orderProductList=localStorage.productOrderStr.split('_');
 		var orderProductLength=orderProductList.length;
 		//var product_tbl_cart_str='<table border="1" width="100%"  bordercolor="#CCCCCC" id="order_tbl" cellpadding="0" cellspacing="0" style="background-color:#F7F7F7; border-radius:5px;">';
+		
+		
 		var product_tbl_cart_str='<ul  data-role="listview">';
 		var total_value=0
+		//alert (localStorage.productOrderStr)
 		for (var j=0; j < orderProductLength; j++){
 			var orderProductIdQtyList=orderProductList[j].split('-');
 			if(orderProductIdQtyList.length==2){
