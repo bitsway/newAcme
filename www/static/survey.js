@@ -1,6 +1,7 @@
 //var apipath='http://127.0.0.1:8000/mrepmobile_new/android_acme_new/'
 //var apipath='http://m.businesssolutionapps.com/mrepmobile/android_acme/'
-var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme_new_last/'
+//var apipath='http://e.businesssolutionapps.com/mrepmobile/android_acme_new_last/'
+var apipath='http://eapps001.cloudapp.net/mrepmobile/android_acme_new_last/'
 
 
 var mobile_off_flag=0;
