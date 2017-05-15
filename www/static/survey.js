@@ -1048,8 +1048,8 @@ function lscVisitSubmit(){
 											$("#product_list_tbl_cart").html('');
 											
 											
-											$("#wait_image_visit_submit").hide();
-											$("#btn_visit_submit").show();
+											//$("#wait_image_visit_submit").hide();
+//											$("#btn_visit_submit").show();
 											//alert ('1');
 	
 											
@@ -1095,6 +1095,8 @@ function lscVisitSubmit(){
 											
 											var url = "#page_confirm_visit_success";	
 											$.mobile.navigate(url);
+											$("#wait_image_visit_submit").hide();
+											$("#btn_visit_submit").show();
 									}//end else
 
 								}
