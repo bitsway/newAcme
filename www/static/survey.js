@@ -1064,11 +1064,7 @@ function lscVisitSubmit(){
 											$("#visit_result").html(result_string );
 											
 											
-											
-											
-											
-											
-											
+								
 											// Clear localStorage
 											
 											localStorage.productOrderStr='';
