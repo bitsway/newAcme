@@ -800,7 +800,8 @@ function getOrder_load(){
 
 
 function getOrder(){	
-	
+	$("#wait_image_visit_submit").hide();
+	$("#btn_visit_submit").show();
 	var url = "#page_order";	
 	$.mobile.navigate(url);	
 	//location.reload();
@@ -1092,8 +1093,8 @@ function lscVisitSubmit(){
 											var url = "#page_confirm_visit_success";	
 											$.mobile.navigate(url);
 											//alert('2');
-											$("#wait_image_visit_submit").hide();
-											$("#btn_visit_submit").show();
+											//$("#wait_image_visit_submit").hide();
+//											$("#btn_visit_submit").show();
 									}//end else
 
 								}
