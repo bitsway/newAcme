@@ -1008,7 +1008,7 @@ function lscVisitSubmit(){
 						 url: localStorage.base_url+'visitSubmit?cid='+localStorage.cid+'&rep_id='+localStorage.user_id+'&rep_pass='+localStorage.user_pass+'&synccode='+localStorage.synccode+'&client_id='+visitClientId+'&visit_type='+visit_type+'&schedule_date='+scheduled_date+'&market_info='+marketInfoStr+'&order_info='+productOrderStr+'&merchandizing='+marchandizingInfoStr+'&campaign='+campaign_str+'&lat='+lat+'&long='+long+'&visit_photo='+imageName+'&httpPass='+localStorage.httppass+'&depot='+localStorage.depot+'&area_id='+localStorage.market_Id,
 						 success: function(result) {
 								
-								alert(result);
+								//alert(result);
 								if (result==''){					
 									//$("#errorChkVSubmit").html('Sorry Network not available');
 									$("#wait_image_visit_submit").hide();
@@ -1092,10 +1092,10 @@ function lscVisitSubmit(){
 											
 											
 											
-											alert('1');
+											//alert('1');
 											var url = "#page_confirm_visit_success";	
 											$.mobile.navigate(url);
-											alert('2');
+											//alert('2');
 											$("#wait_image_visit_submit").hide();
 											$("#btn_visit_submit").show();
 									}//end else
